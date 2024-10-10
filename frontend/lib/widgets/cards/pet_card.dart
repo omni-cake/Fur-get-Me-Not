@@ -74,7 +74,7 @@ class PetCard extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          "Description here", // Replace this with pet description if available
+                          "Description here",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
