@@ -9,7 +9,7 @@ import 'package:fur_get_me_not/widgets/headers/banner_card.dart';
 import 'package:fur_get_me_not/adopter/models/adoption_list/category.dart';
 import 'package:fur_get_me_not/adopter/repositories/adoption_list/category_repository.dart';
 import 'package:fur_get_me_not/widgets/headers/categories.dart';
-
+//
 class AdoptionScreen extends StatefulWidget {
   const AdoptionScreen({super.key});
 

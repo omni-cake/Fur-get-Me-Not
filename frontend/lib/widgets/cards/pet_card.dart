@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fur_get_me_not/adopter/models/adoption_list/pet.dart';
-
+//
 class PetCard extends StatelessWidget {
   final Pet pet;
   final Size size;
