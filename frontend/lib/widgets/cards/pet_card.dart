@@ -15,63 +15,75 @@ class PetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = size.width;
+    double cardWidth = (screenWidth / 2) - 16;
+    double cardHeight = cardWidth * 1.25;
+
     return Padding(
       padding: const EdgeInsets.only(left: 20),
       child: GestureDetector(
         onTap: onTap,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(15),
           child: Container(
-            height: size.height * 0.3,
-            width: size.width * 0.55,
-            color: const Color(0xFF21899C),
-            child: Stack(
+            width: cardWidth,
+            height: cardHeight,
+            decoration: BoxDecoration(
+              color: const Color(0xFF21899C),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  blurRadius: 4,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Positioned(
-                  bottom: -10,
-                  right: -10,
-                  height: 100,
-                  width: 100,
-                  child: Transform.rotate(
-                    angle: 12,
-                    child: Image.asset(
-                      "images/paw1.png",
+                Flexible(
+                  flex: 2,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ),
+                    child: Image.network(
+                      pet.petImageUrl,
+                      width: double.infinity,
+                      height: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                Positioned(
-                  bottom: -10,
-                  right: 10,
-                  child: Hero(
-                    tag: pet.id,
-                    child: Image.network(
-                      pet.petImageUrl,
-                      height: size.height * 0.30,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              pet.name,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          pet.name,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 4),
+                        Text(
+                          "Description here", // Replace this with pet description if available
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

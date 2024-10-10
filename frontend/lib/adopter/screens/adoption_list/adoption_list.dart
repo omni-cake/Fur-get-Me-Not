@@ -33,7 +33,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            const BannerWidget(text: "Adopt a feline companion\n now!"),
+            const BannerWidget(text: "Fur-get-Me-Not"),
             const SizedBox(height: 20),
             Expanded(
               child: BlocBuilder<AdoptionBrowseBloc, AdoptionBrowseState>(
@@ -41,12 +41,19 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                   if (state is AdoptionBrowseLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is AdoptionBrowseLoaded) {
-                    return ListView(
-                      children: List.generate(state.pets.length, (index) {
-                        final pet = state.pets[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 20), // Space between cards
-                          child: PetCard(
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GridView.builder(
+                        itemCount: state.pets.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 0.75,
+                        ),
+                        itemBuilder: (context, index) {
+                          final pet = state.pets[index];
+                          return PetCard(
                             pet: pet,
                             size: size,
                             onTap: () {
@@ -56,9 +63,9 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                 ),
                               );
                             },
-                          ),
-                        );
-                      }),
+                          );
+                        },
+                      ),
                     );
                   } else if (state is AdoptionBrowseError) {
                     return Center(child: Text(state.message));
